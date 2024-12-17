@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Metadata about the document -->
+    <meta charset="UTF-8"> <!-- Specifies character encoding for the document -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Makes the page responsive to different screen sizes -->
+    <title>Game Genre Quiz</title> <!-- The title of the webpage displayed on the browser tab -->
+    <style>
+        /* CSS styles for the webpage */
+        body {
+            font-family: Arial, sans-serif; /* Sets the font for the entire page */
+            margin: 20px;
+            padding: 20px;
+            background-color: #f9f9f9; /* Sets a light gray background color */
+        }
+        h1 {
+            text-align: center; /* Centers the header text */
+            color: #333; /* Sets a dark gray color for the header text */
+        }
+        .quiz-container {
+            max-width: 800px; /* Limits the width of the quiz container */
+            margin: 0 auto; /* Centers the container horizontally */
+            background: #fff; /* Sets a white background */
+            padding: 20px; /* Adds padding inside the container */
+            border-radius: 8px; /* Rounds the corners of the container */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for depth */
+        }
+        .question {
+            margin-bottom: 20px; /* Adds spacing between questions */
+        }
+        .answers {
+            list-style: none; /* Removes default list styling for answers */
+            padding: 0;
+        }
+        .answers li {
+            margin-bottom: 10px; /* Adds spacing between answer options */
+        }
+        button {
+            display: block; /* Makes the button a block element */
+            margin: 20px auto; /* Centers the button horizontally */
+            padding: 10px 20px; /* Adds padding to the button */
+            background-color: #007BFF; /* Sets a blue background color */
+            color: white; /* Sets the button text color to white */
+            border: none; /* Removes the default button border */
+            border-radius: 5px; /* Rounds the corners of the button */
+            cursor: pointer; /* Changes the cursor to a pointer when hovering */
+        }
+        button:hover {
+            background-color: #0056b3; /* Changes the button color on hover */
+        }
+        #genre-image {
+            display: block; /* Ensures the image is displayed as a block */
+            margin: 20px auto; /* Centers the image horizontally */
+            max-width: 100%; /* Makes sure the image does not overflow the screen width */
+            border-radius: 10px; /* Adds rounded corners to the image */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header for the webpage -->
+    <h1>Find Your Perfect Game Genre</h1>
+    
+    <!-- Container for the quiz -->
+    <div class="quiz-container">
+        <!-- Form to group quiz questions -->
+        <form id="quiz-form">
+            <!-- Question 1 -->
+            <div class="question">
+                <p>1. What is your ideal way to spend time in a game?</p>
+                <ul class="answers">
+                    <!-- Radio buttons for answers, grouped by the same name (q1) -->
+                    <li><label><input type="radio" name="q1" value="10"> Defeating enemies with quick reflexes</label></li>
+                    <li><label><input type="radio" name="q1" value="8"> Exploring new worlds and solving mysteries</label></li>
+                    <li><label><input type="radio" name="q1" value="9"> Managing and leveling up characters</label></li>
+                    <li><label><input type="radio" name="q1" value="7"> Building and designing things</label></li>
+                    <li><label><input type="radio" name="q1" value="6"> Planning and executing strategies</label></li>
+                </ul>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question">
+                <p>2. How do you prefer to experience combat in a game?</p>
+                <ul class="answers">
+                    <!-- Radio buttons for answers, grouped by the same name (q2) -->
+                    <li><label><input type="radio" name="q2" value="10"> Fast-paced with lots of shooting or fighting</label></li>
+                    <li><label><input type="radio" name="q2" value="8"> Turn-based with tactical decisions</label></li>
+                    <li><label><input type="radio" name="q2" value="7"> Focused on quick reflexes and combos</label></li>
+                    <li><label><input type="radio" name="q2" value="5"> None, I prefer avoiding conflict</label></li>
+                    <li><label><input type="radio" name="q2" value="9"> Team up and battle in large-scale multiplayer environments</label></li>
+                </ul>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question">
+                <p>3. What kind of setting do you prefer for a game?</p>
+                <ul class="answers">
+                    <!-- Radio buttons for answers, grouped by the same name (q3) -->
+                    <li><label><input type="radio" name="q3" value="10"> A vast open world with endless exploration</label></li>
+                    <li><label><input type="radio" name="q3" value="8"> A futuristic or medieval world filled with magic or technology</label></li>
+                    <li><label><input type="radio" name="q3" value="7"> Realistic settings with life-like simulations</label></li>
+                    <li><label><input type="radio" name="q3" value="9"> A competitive environment where players fight against each other</label></li>
+                    <li><label><input type="radio" name="q3" value="5"> A haunted or creepy world with horror elements</label></li>
+                </ul>
+            </div>
+
+            <!-- Submit button to calculate the genre -->
+            <button type="button" onclick="calculateGenre()">Submit</button>
+        </form>
+        
+        <!-- Div to display the quiz result -->
+        <div id="result" style="text-align: center; margin-top: 20px; font-size: 1.2em; color: #333;"></div>
+        
+        <!-- Image element to display the genre-related image -->
+        <img id="genre-image" src="" alt="Genre-related image" style="display: none;">
+    </div>
+
+    <script>
+        // Function to calculate the game genre based on the selected answers
+        function calculateGenre() {
+            const form = document.getElementById('quiz-form'); // Reference to the quiz form
+            const formData = new FormData(form); // Collects all form data
+            let score = 0; // Initializes the score to 0
+
+            // Loops through the selected values to calculate the total score
+            for (const value of formData.values()) {
+                score += parseInt(value);
+            }
+
+            // Determines the genre based on the score
+            let genre = '';
+            let imageUrl = ''; // URL for the genre-related image
+            if (score <= 20) {
+                genre = 'Action (Fast-paced combat and quick reflexes)';
+                imageUrl = 'images/action-genre.jpg'; 
+            } else if (score <= 30) {
+                genre = 'RPG (Story-driven experiences with character progression)';
+                imageUrl = 'images/rpg-genre.jpg';
+            } else if (score <= 40) {
+                genre = 'Shooter (Competitive, team-based, and action-packed)';
+                imageUrl = 'images/shooter-genre.jpg';
+            } else if (score <= 50) {
+                genre = 'Adventure (Exploration, puzzle-solving, and narrative depth)';
+                imageUrl = 'images/adventure-genre.jpg';
+            } else if (score <= 60) {
+                genre = 'Sandbox/Simulation (Creative, open-world gameplay)';
+                imageUrl = 'images/sandbox-genre.jpg';
+            } else {
+                genre = 'Strategy (Planning, tactics, and resource management)';
+                imageUrl = 'images/strategy-genre.jpg';
+            }
+
+            // Displays the result in the result div
+            document.getElementById('result').textContent = `Your ideal game genre is: ${genre}`;
+            
+            // Updates the image source and makes it visible
+            const genreImage = document.getElementById('genre-image');
+            genreImage.src = imageUrl;
+            genreImage.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
